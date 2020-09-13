@@ -41,5 +41,5 @@ https://www.w3schools.com/python/python_operators.asp
 ### Documentation du module math
 https://docs.python.org/3/library/math.html
 
-### Formule de conversion Farenheit vers Celsius
+### Formule de conversion Celsius vers Farenheit
 Tf = Tc x 1.8 + 32
