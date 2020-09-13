@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+
+import math
 import os
 import sys
 import unittest
@@ -8,60 +10,80 @@ import exercice
 
 
 class TestExercice(unittest.TestCase):
-    def setUp(self):
-        with open('./data/sample_countries.txt') as f:
-            self.countries = [name.replace('\n', '') for name in f.readlines()]
-
-    def test_capitalize_first_letter(self):
-        names = [
-            'Angola',
-            'The Bahamas',
-            'Andorra',
-            'Antigua and Barbuda',
-            'Georgia'
+    def test_average(self):
+        values = [
+            (2, 4, 6),
+            (-1, 0, 1),
+            (-1, -2, -4)
         ]
-        altered_names = [x[0].lower() + x[1:] for x in names]
-        output = list(map(exercice.capitaliser_pays, altered_names))
-        output_first_letters = list(map(lambda name: name[0], output))
-        expected_first_letters = list(map(lambda name: name[0], names))
-        self.assertListEqual(
-            output_first_letters,
-            expected_first_letters,
-            'Mettre la permiere lettre en majuscule'
-        )
 
-    def test_lower_case_names(self):
-        altered_names = [country.lower() for country in self.countries]
-        output = list(map(exercice.capitaliser_pays, altered_names))
+        output = [exercice.average(*v) for v in values]
+        answer = [sum(v) / len(v) for v in values]
+
         self.assertListEqual(
             output,
-            self.countries,
-            'Certaines lettres ne doivent pas etre en minuscules'
+            answer,
+            'Mauvais calcul de la moyenne'
         )
+    
+    def test_to_radians(self):
+        values = [
+            (-5, 2, 0),
+            (10.0, 4, 59),
+            (360, 1, 3),
+            (400, 55, 6)
+        ]
 
-    def test_upper_case_names(self):
-        altered_names = [country.upper() for country in self.countries]
-        output = list(map(exercice.capitaliser_pays, altered_names))
+        output = [exercice.to_radians(*v) for v in values]
+        answer = [math.radians(v[0] + (v[1] + (v[2] / 60)) / 60) for v in values]
+
         self.assertListEqual(
             output,
-            self.countries,
-            'Certaines lettres ne doivent pas etre en majuscule'
+            answer,
+            'Mauvais calcul de degres -> radians'
         )
 
-    def test_linking_words(self):
-        names = [
-            'Antigua and Barbuda',
-            'Bosnia and Herzegovina'
-        ]
-        altered_names = [
-            'Antigua aNd Barbuda',
-            'Bosnia ANd Herzegovina'
-        ]
-        output = list(map(exercice.capitaliser_pays, altered_names))
+    def test_to_degrees(self):
+        def __to_degrees(rad: float) -> tuple:
+            degrees = math.degrees(rad)
+            minutes = (degrees % 1) * 60
+            seconds = (minutes % 1) * 60
+
+            return degrees - minutes, minutes - seconds, seconds
+            
+        values = [2, -4, 5, 4.09]
+
+        output = [exercice.to_degrees(v) for v in values]
+        answer = [__to_degrees(v) for v in values]
+
         self.assertListEqual(
             output,
-            names,
-            'Les mots de liaison doivent etre en minuscule'
+            answer,
+            'Mauvais calcul de radians -> degres'
+        )
+
+    def test_to_celsius(self):
+        values = [0, -25, 451]
+
+        output = [exercice.to_celsius(v) for v in values]
+        answer = [(v - 32) / 1.8 for v in values]
+
+        self.assertListEqual(
+            output,
+            answer,
+            'Mauvais calcul de farenheit -> celsius'
+        )
+
+    def test_to_farenheit(self):
+        values = [0, -25, 451]
+
+        output = [exercice.to_farenheit(v) for v in values]
+        answer = [v * 1.8 + 32 for v in values]
+
+        self.assertListEqual(
+            output,
+            answer,
+            'Mauvais calcul de celsius -> farenheit'
         )
 
 
