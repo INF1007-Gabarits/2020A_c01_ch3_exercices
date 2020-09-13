@@ -4,53 +4,42 @@
 
 Avant de commencer. Consulter les instructions à suivre dans [instructions.md](instructions.md)
 
-## Objectif
+## Objectifs
 
-Modifier les casses de noms de pays afin que:
-* Les mots de liaisons (ex.: and) soient en casses minuscules
-* Les premières lettres de noms soient en casses majuscules
+Compléter les quelques exercices suivants en modifiant le code de [exercice.py](exercice.py):
 
-### Exemple
-```python
-print(capitaliser_pays('antigua ANd barbuda'))
-```
-Antigua and Barbuda
+1. Calculer la moyenne de 3 nombres donnés
+2. Convertir en radians un angle fourni au départ en degrés, minutes, secondes
+3. Convertir en degrés, minutes, secondes un angle fourni au départ en radians
+4. Convertir en degrés Celsius une température exprimée au départ en degrés Fahrenheit et vice-versa
 
 ### À compléter
-Vous devez compléter la fonction suivante du fichier [exercice.py](exercice.py).
+Vous devez compléter les fonctions suivantes du fichier [exercice.py](exercice.py).
 
 ```python
-def capitaliser_pays(nom):
-    #TODO completer la fonction
-    return nom
+def average(a: float, b: float, c: float) -> float:
+    return 0.0
+
+def to_radians(angle_degs: float, angle_mins: float, angle_secs: float) -> float:
+    return 0.0
+
+def to_degrees(angle_rads: float) -> tuple:
+    return 0.0, 0.0, 0.0
+
+def to_celsius(temperature: float) -> float:
+    return 0.0
+
+def to_farenheit(temperature: float) -> float:
+    return 0.0
 ```
 
 ## Connaissances utiles
 
-### Changement de casse
-```python
-chaine = "Hello, World!"
-print(chaine.upper())
-print(chaine.lower())
-print(chaine.capitalize())
-print(chaine.swapcase())
-```
-HELLO, WORLD!<br>
-hello, world!<br>
-Hello, world!<br>
-hELLO, wORLD!<br>
+### Opérateurs arithmétiques de base
+https://www.w3schools.com/python/python_operators.asp
 
-### Remplacement de sous-chaîne (substring)
-```python
-print(chaine.replace('Hello', 'Bonjour'))
-```
-Bonjour, World!<br>
+### Documentation du module math
+https://docs.python.org/3/library/math.html
 
-### Trouver une sous-chaîne ou un charactère
-```python
-# retourne le premier indice trouvé
-print(chaine.find('o'))
-print(chaine.find('World'))
-```
-4<br>
-7
+### Formule de conversion Farenheit vers Celsius
+Tf = Tc x 1.8 + 32
